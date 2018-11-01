@@ -1,4 +1,4 @@
-Ubuntu 16.04 CIS STIG
+Linux Distribution Independent hardening  based on CIS Benchmark
 ================
 
 Configure any Linux machine to be CIS Distribution Independent compliant. Level 1 and 2 findings will be corrected by default.
@@ -8,7 +8,7 @@ This role **will make changes to the system** that could break things. This is n
 ## IMPORTANT INSTALL STEP
 
 
-Based on [CIS Ubuntu Benchmark v1.1.0 - 12-28-2017 ](https://community.cisecurity.org/collab/public/index.php).
+Based on [Distribution Independent Linux (CIS Distribution Independent Linux Benchmark version 1.1.0)](https://www.cisecurity.org/benchmark/distribution_independent_linux/).
 
 This repo originated from work done by [Florian Utz](https://github.com/florianutz/Ubuntu1604-CIS), which repo originated from work done by [MindPointGroup](https://github.com/MindPointGroup/RHEL7-CIS)
 
@@ -35,8 +35,9 @@ There are many role variables defined in defaults/main.yml. This list shows the 
 
 **cis_dil_section6**: CIS - System Maintenance settings (Section 6) (Default: true)
 
-##### Disable all selinux functions
+##### Disable all selinux and apparmor functions
 `cis_dil_selinux_disable: false`
+`cis_dil_apparmor_disable: false`
 
 ##### Service variables:
 ###### These control whether a server should or should not be allowed to continue to run these services
@@ -155,7 +156,7 @@ hosts: servers
 become: yes
 
 roles:
-- Ubuntu1604-CIS
+  - CIS_Distribution_Independent_Linux_Benchmark
 ```
 
 Tags
