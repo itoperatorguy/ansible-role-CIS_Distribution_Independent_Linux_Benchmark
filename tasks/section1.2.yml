@@ -1,0 +1,24 @@
+---
+- name: "NOTSCORED | 1.2.1 | PATCH | Ensure package manager repositories are configured"
+  command: /bin/true
+  changed_when: false
+  when:
+      - cis_dil_rule_1_2_1
+  tags:
+      - level1
+      - notscored
+      - patch
+      - rule_1.2.1
+
+
+- name: "NOTSCORED | 1.2.3 | PATCH | Ensure GPG keys are configured"
+  command: /bin/true
+  changed_when: false
+  when:
+      - cis_dil_rule_1_2_3
+  tags:
+      - level1
+      - notscored
+      - patch
+      - rule_1.2.3
+      - notimplemented
