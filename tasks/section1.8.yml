@@ -1,0 +1,10 @@
+---
+- name: "NOTSCORED | 1.8 | PATCH | Ensure updates, patches, and additional security software are installed"
+  apt:
+      upgrade: dist
+  tags:
+      - level1
+      - notscored
+      - patch
+      - rule_1.8
+      - skip_ansible_lint
