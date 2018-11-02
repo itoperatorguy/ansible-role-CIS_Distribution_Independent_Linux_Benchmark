@@ -1,0 +1,55 @@
+---
+- name: "SCORED | 1.4.1 | PATCH | Ensure permissions on bootloader config are configured"
+  file:
+      path: "/boot/grub/grub.cfg"
+      owner: root
+      group: root
+      mode: 0600
+  when:
+      - ansible_os_family == "Debian"
+      - cis_dil_rule_1_4_1
+  tags:
+      - level1
+      - scored
+      - grub
+      - patch
+      - rule_1.4.1
+
+- name: "SCORED | 1.4.2 | PATCH | Ensure bootloader password is set"
+  grub_crypt:
+      password: "{{ cis_dil_bootloader_password }}"
+  register: grub_pass
+  when:
+      - cis_dil_set_boot_pass
+      - cis_dil_rule_1_4_2
+  tags:
+      - level1
+      - scored
+      - grub
+      - patch
+      - rule_1.4.2
+      - notimplemented
+
+- name: "NOTSCORED | 1.4.3 | PATCH | Ensure authentication required for single user mode"
+  command: /bin/true
+  changed_when: false
+  when:
+      - cis_dil_rule_1_4_3
+  tags:
+      - level1
+      - notscored
+      - patch
+      - rule_1.4.3
+      - notimplemented
+
+- name: "NOTSCORED | 1.4.4 | PATCH | Ensure interactive boot is not enabled"
+  command: /bin/true
+  changed_when: false
+  when:
+      - cis_dil_rule_1_4_4
+  tags:
+      - level1
+      - notscored
+      - patch
+      - rule_1.4.4
+      - notimplemented

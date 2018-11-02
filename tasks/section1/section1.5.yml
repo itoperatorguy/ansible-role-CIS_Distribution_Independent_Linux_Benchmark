@@ -1,0 +1,85 @@
+---
+- name: "SCORED | 1.5.1 | PATCH | Ensure core dumps are restricted"
+  lineinfile:
+      state: present
+      dest: /etc/security/limits.conf
+      regexp: '^#?\\*.*core'
+      line: '*                hard    core            0'
+      insertbefore: '^# End of file'
+  when:
+      - cis_dil_rule_1_5_1
+  tags:
+      - level1
+      - scored
+      - limits
+      - patch
+      - rule_1.5.1
+
+- name: "SCORED | 1.5.1 | PATCH | Ensure core dumps are restricted"
+  sysctl:
+      name: fs.suid_dumpable
+      value: 0
+      state: present
+      reload: true
+      sysctl_set: true
+      ignoreerrors: true
+  when:
+      - cis_dil_rule_1_5_1
+  tags:
+      - level1
+      - scored
+      - sysctl
+      - patch
+      - rule_1.5.1
+
+- name: "NOTSCORED | 1.5.2 | PATCH | Ensure XD/NX support is enabled"
+  shell: dmesg | grep -E "NX|XD" | grep " active"
+  changed_when: false
+  when:
+      - cis_dil_rule_1_5_2
+  tags:
+      - level1
+      - notscored
+      - patch
+      - rule_1.5.2
+      - notimplemented
+
+- name: "SCORED | 1.5.3 | PATCH | Ensure address space layout randomization (ASLR) is enabled"
+  sysctl:
+      name: kernel.randomize_va_space
+      value: 2
+      state: present
+      reload: true
+      sysctl_set: true
+      ignoreerrors: true
+  when:
+      - cis_dil_rule_1_5_3
+  tags:
+      - level1
+      - scored
+      - patch
+      - sysctl
+      - rule_1.5.3
+
+- name: "SCORED | 1.5.4 | PATCH | Ensure prelink is disabled"
+  command: prelink -ua
+  when:
+      - prelink_installed.rc == 0
+      - cis_dil_rule_1_5_4
+  tags:
+      - level1
+      - scored
+      - patch
+      - rule_1.5.4
+
+- name: "SCORED | 1.5.4 | PATCH | Ensure prelink is disabled"
+  apt:
+      name: prelink
+      state: absent
+  when:
+      - cis_dil_rule_1_5_4
+  tags:
+      - level1
+      - scored
+      - patch
+      - rule_1.5.4
