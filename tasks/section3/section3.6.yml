@@ -1,0 +1,120 @@
+---
+- name: "SCORED | 3.6 | PATCH | Ensure firewalld is installed and started | CUSTOM"
+  service:
+      name: firewalld
+      state: started
+      enabled: true
+  when: cis_dil_firewall == "firewalld" and cis_dil_setup_firewall
+  tags:
+      - level1
+      - scored
+      - patch
+      - rule_3.6
+
+- name: "SCORED | 3.6.1 | PATCH | Ensure iptables is installed"
+  apt:
+      name: iptables
+      state: present
+      install_recommends: false
+  when: cis_dil_firewall == "iptables" and cis_dil_setup_firewall
+  tags:
+      - level1
+      - scored
+      - patch
+      - rule_3.6.1
+
+- name: "SCORED | 3.6.1 | PATCH | Ensure iptables is installed and started"
+  service:
+      name: iptables
+      state: started
+      enabled: true
+  when: cis_dil_firewall == "iptables" and cis_dil_setup_firewall
+  tags:
+      - level1
+      - scored
+      - patch
+      - rule_3.6.1
+
+- name: "SCORED | 3.6.2 | PATCH | Ensure default deny firewall policy"
+  lineinfile:
+      dest: /etc/firewalld/firewalld.conf
+      regexp: "^DefaultZone"
+      line: "DefaultZone=drop"
+  when: cis_dil_firewall == "firewalld" and cis_dil_setup_firewall
+  tags:
+      - level1
+      - scored
+      - patch
+      - rule_3.6.2
+
+- name: "SCORED | 3.6.2 | PATCH | Ensure default deny firewall policy"
+  firewalld:
+      state: enabled
+      zone: drop
+      permanent: true
+  when: cis_dil_firewall == "firewalld" and cis_dil_setup_firewall
+  tags:
+      - level1
+      - scored
+      - patch
+      - rule_3.6.2
+
+- name: "SCORED | 3.6.2 | PATCH | Ensure default deny firewall policy"
+  command: /bin/true
+  changed_when: false
+  when: cis_dil_firewall == "iptables" and cis_dil_setup_firewall
+  tags:
+      - level1
+      - scored
+      - patch
+      - rule_3.6.2
+      - notimplemented
+
+- name: "SCORED | 3.6.3 | PATCH | Ensure loopback traffic is configured"
+  command: /bin/true
+  changed_when: false
+  when: cis_dil_firewall == "iptables" and cis_dil_setup_firewall
+  tags:
+      - level1
+      - scored
+      - patch
+      - rule_3.6.3
+      - notimplemented
+
+- name: "NOTSCORED | 3.6.4 | PATCH | Ensure outbound and established connections are configured"
+  command: /bin/true
+  changed_when: false
+  when: cis_dil_firewall == "iptables" and cis_dil_setup_firewall
+  tags:
+      - level1
+      - notscored
+      - patch
+      - rule_3.6.4
+      - notimplemented
+
+- name: "SCORED | 3.6.5 | PATCH | Ensure firewall rules exist for all open ports"
+  firewalld:
+      service: "{{ item }}"
+      state: enabled
+      zone: drop
+      permanent: true
+      immediate: true
+  when: cis_dil_firewall == "firewalld" and cis_dil_setup_firewall
+  notify: restart firewalld
+  with_items: "{{ cis_dil_firewall_services }}"
+  tags:
+      - level1
+      - scored
+      - patch
+      - rule_3.6.5
+
+- name: "SCORED | 3.6.5 | PATCH | Ensure firewall rules exist for all open ports"
+  command: /bin/true
+  changed_when: false
+  when: cis_dil_firewall == "iptables" and cis_dil_setup_firewall
+  tags:
+      - level1
+      - scored
+      - patch
+      - rule_3.6.5
+      - notimplemented

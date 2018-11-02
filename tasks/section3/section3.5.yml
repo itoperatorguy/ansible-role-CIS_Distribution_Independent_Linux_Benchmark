@@ -1,0 +1,48 @@
+---
+- name: "NOTSCORED | 3.5.1 | PATCH | Ensure DCCP is disabled"
+  lineinfile:
+      dest: /etc/modprobe.d/CIS.conf
+      regexp: "^(#)?install dccp(\\s|$)"
+      line: "install dccp /bin/true"
+      create: true
+  tags:
+      - level1
+      - notscored
+      - patch
+      - rule_3.5.1
+
+- name: "NOTSCORED | 3.5.2 | PATCH | Ensure SCTP is disabled"
+  lineinfile:
+      dest: /etc/modprobe.d/CIS.conf
+      regexp: "^(#)?install sctp(\\s|$)"
+      line: "install sctp /bin/true"
+      create: true
+  tags:
+      - level1
+      - notscored
+      - patch
+      - rule_3.5.2
+
+- name: "NOTSCORED | 3.5.3 | PATCH | Ensure RDS is disabled"
+  lineinfile:
+      dest: /etc/modprobe.d/CIS.conf
+      regexp: "^(#)?install rds(\\s|$)"
+      line: "install rds /bin/true"
+      create: true
+  tags:
+      - level1
+      - notscored
+      - patch
+      - rule_3.5.3
+
+- name: "NOTSCORED | 3.5.4 | PATCH | Ensure TIPC is disabled"
+  lineinfile:
+      dest: /etc/modprobe.d/CIS.conf
+      regexp: "^(#)?install tipc(\\s|$)"
+      line: "install tipc /bin/true"
+      create: true
+  tags:
+      - level1
+      - notscored
+      - patch
+      - rule_3.5.4

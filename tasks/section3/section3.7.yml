@@ -1,0 +1,10 @@
+---
+- name: "NOTSCORED | 3.7 | PATCH | Ensure wireless interfaces are disabled"
+  command: /bin/true
+  changed_when: false
+  tags:
+      - level1
+      - notscored
+      - patch
+      - rule_3.7
+      - notimplemented

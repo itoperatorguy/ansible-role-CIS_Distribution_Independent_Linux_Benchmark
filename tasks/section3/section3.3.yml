@@ -1,0 +1,55 @@
+---
+- name: "SCORED | 3.3.1 | PATCH | Ensure IPv6 router advertisements are not accepted"
+  sysctl:
+      name: '{{ item.name }}'
+      value: '{{ item.value }}'
+      sysctl_set: true
+      state: present
+      reload: true
+      ignoreerrors: true
+  with_items:
+      - { name: net.ipv6.conf.all.accept_ra, value: 0 }
+      - { name: net.ipv6.conf.default.accept_ra, value: 0 }
+  when: cis_dil_ipv6_required == true
+  notify:
+      - sysctl flush ipv6 route table
+  tags:
+      - level1
+      - scored
+      - patch
+      - sysctl
+      - rule_3.3.1
+
+- name: "SCORED | 3.3.2 | PATCH | Ensure IPv6 redirects are not accepted"
+  sysctl:
+      name: '{{ item.name }}'
+      value: '{{ item.value }}'
+      sysctl_set: true
+      state: present
+      reload: true
+      ignoreerrors: true
+  with_items:
+      - { name: net.ipv6.conf.all.accept_redirects, value: 0 }
+      - { name: net.ipv6.conf.default.accept_redirects, value: 0 }
+  when: cis_dil_ipv6_required == true
+  notify:
+      - sysctl flush ipv6 route table
+  tags:
+      - level1
+      - scored
+      - patch
+      - sysctl
+      - rule_3.3.2
+
+- name: "NOTSCORED | 3.3.3 | PATCH | Ensure IPv6 is disabled"
+  lineinfile:
+      dest: /etc/modprobe.d/CIS.conf
+      regexp: "^(#)?options ipv6 disable="
+      line: "options ipv6 disable=1"
+      create: true
+  when: cis_dil_ipv6_required == false
+  tags:
+      - level1
+      - notscored
+      - patch
+      - rule_3.3.3
