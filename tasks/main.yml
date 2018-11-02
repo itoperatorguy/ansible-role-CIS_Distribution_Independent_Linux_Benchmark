@@ -93,10 +93,32 @@
    - section1
    - section1.8
 
-- include: section2.yml
+- include: section2/section2.1.yml
   become: true
-  when: cis_dil_section2
-  tags: section2
+  when:
+    - cis_dil_section2
+    - cis_dil_section2_1
+  tags:
+    - section2
+    - section2.1
+
+- include: section2/section2.2.yml
+  become: true
+  when:
+    - cis_dil_section2
+    - cis_dil_section2_2
+  tags:
+    - section2
+    - section2.2
+
+- include: section2/section2.3.yml
+  become: true
+  when:
+    - cis_dil_section2
+    - cis_dil_section2_3
+  tags:
+    - section2
+    - section2.3
 
 - include: section3.yml
   become: true

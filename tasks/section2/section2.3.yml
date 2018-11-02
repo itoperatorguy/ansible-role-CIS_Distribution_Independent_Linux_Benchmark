@@ -1,0 +1,65 @@
+---
+- name: "SCORED | 2.3.1 | PATCH | Ensure NIS Client is not installed"
+  apt:
+      name: ypbind
+      state: absent
+  when:
+      - cis_dil_ypbind_required == false
+      - cis_dil_rule_2_3_1
+  tags:
+      - level1
+      - scored
+      - patch
+      - rule_2.3.1
+
+- name: "SCORED | 2.3.2 | PATCH | Ensure rsh client is not installed"
+  apt:
+      name: rsh
+      state: absent
+  when:
+      - cis_dil_rsh_required == false
+      - cis_dil_rule_2_3_2
+  tags:
+      - level1
+      - scored
+      - patch
+      - rule_2.3.2
+
+- name: "SCORED | 2.3.3 | PATCH | Ensure talk client is not installed"
+  apt:
+      name: talk
+      state: absent
+  when:
+      - cis_dil_talk_required == false
+      - cis_dil_rule_2_3_3
+  tags:
+      - level1
+      - scored
+      - patch
+      - rule_2.3.3
+
+- name: "SCORED | 2.3.4 | PATCH | Ensure telnet client is not installed"
+  apt:
+      name: telnet
+      state: absent
+  when:
+      - cis_dil_telnet_required == false
+      - cis_dil_rule_2_3_4
+  tags:
+      - level1
+      - scored
+      - patch
+      - rule_2.3.4
+
+- name: "SCORED | 2.3.5 | PATCH | Ensure LDAP client is not installed"
+  apt:
+      name: openldap-clients
+      state: absent
+  when:
+      - cis_dil_openldap_clients_required == false
+      - cis_dil_rule_2_3_5
+  tags:
+      - level1
+      - scored
+      - patch
+      - rule_2.3.5
