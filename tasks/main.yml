@@ -120,10 +120,68 @@
     - section2
     - section2.3
 
-- include: section3.yml
+- include: section3/section3.1.yml
   become: true
-  when: cis_dil_section3
-  tags: section3
+  when:
+    - cis_dil_section3
+    - cis_dil_section3_1
+  tags:
+    - section3
+    - section3.1
+
+- include: section3/section3.2.yml
+  become: true
+  when:
+    - cis_dil_section3
+    - cis_dil_section3_2
+  tags:
+    - section3
+    - section3.2
+
+- include: section3/section3.3.yml
+  become: true
+  when:
+    - cis_dil_section3
+    - cis_dil_section3_3
+  tags:
+    - section3
+    - section3.3
+
+- include: section3/section3.4.yml
+  become: true
+  when:
+    - cis_dil_section3
+    - cis_dil_section3_4
+  tags:
+    - section3
+    - section3.4
+
+- include: section3/section3.5.yml
+  become: true
+  when:
+    - cis_dil_section3
+    - cis_dil_section3_5
+  tags:
+    - section3
+    - section3.5
+
+- include: section3/section3.6.yml
+  become: true
+  when:
+    - cis_dil_section3
+    - cis_dil_section3_6
+  tags:
+    - section3
+    - section3.6
+
+- include: section3/section3.7.yml
+  become: true
+  when:
+    - cis_dil_section3
+    - cis_dil_section3_7
+  tags:
+    - section3
+    - section3.7
 
 - include: section4.yml
   become: true

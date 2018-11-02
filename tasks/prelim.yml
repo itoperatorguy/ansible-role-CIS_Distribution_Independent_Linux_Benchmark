@@ -93,6 +93,42 @@
   changed_when: false
   check_mode: false
 
+- name: "PRELIM | Check if we are using chrony | Ubuntu 16.04+"
+  shell: dpkg --get-selections | grep -o chrony
+  register: using_chrony
+  changed_when: false
+  failed_when: false
+  check_mode: false
+  when:
+    - ansible_os_family == "Debian"
+
+- name: "PRELIM | Check if we are using chrony | RHEL/CentOS 7+"
+  shell: rpm -aq | grep -o chrony
+  register: using_chrony
+  changed_when: false
+  failed_when: false
+  check_mode: false
+  when:
+    - (ansible_distribution == "CentOS") or (ansible_distribution == "RedHat")
+
+- name: "PRELIM | Check if we are using ntp | Ubuntu 16.04+"
+  shell: dpkg --get-selections | grep -o ntp
+  register: using_ntp
+  changed_when: false
+  failed_when: false
+  check_mode: false
+  when:
+    - ansible_os_family == "Debian"
+
+- name: "PRELIM | Check if we are using ntp | RHEL/CentOS 7+"
+  shell: rpm -aq | grep -o ntp
+  register: using_ntp
+  changed_when: false
+  failed_when: false
+  check_mode: false
+  when:
+    - (ansible_distribution == "CentOS") or (ansible_distribution == "RedHat")
+
 - name: "PRELIM | Check for ntpd service"
   shell: "systemctl show {{ ntp_service[ansible_os_family] }} | grep LoadState | cut -d = -f 2"
   register: ntpd_service_status
@@ -104,6 +140,23 @@
   register: chronyd_service_status
   changed_when: false
   check_mode: false
+
+- name: "PRELIM | If no time service installed or configured then lets use chrony"
+  set_fact:
+    cis_dil_time_synchronization_service: "chrony"
+  failed_when: false
+  when:
+    - using_chrony is skipped
+    - using_ntp is skipped
+    - (cis_dil_time_synchronization_service != "ntp") or (cis_dil_time_synchronization_service != "chrony")
+
+- name: "PRELIM | set ntp as time service if it is installed"
+  set_fact:
+    cis_dil_time_synchronization_service: "ntp"
+  failed_when: false
+  when:
+    - using_ntp is not skipped
+    - using_ntp.rc == "0"
 
 - name: "PRELIM | Check for avahi-daemon service"
   shell: "systemctl show avahi-daemon | grep LoadState | cut -d = -f 2"

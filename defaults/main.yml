@@ -3,6 +3,7 @@
 cis_dil_skip_for_travis: false
 
 cis_dil_notauto: false
+# CIS Section 1 rules
 cis_dil_section1: true
 cis_dil_section1_1: true
 cis_dil_section1_2: true
@@ -12,7 +13,11 @@ cis_dil_section1_5: true
 cis_dil_section1_6: true
 cis_dil_section1_7: true
 cis_dil_section1_8: true
+# CIS Section 2 rules
 cis_dil_section2: true
+cis_dil_section2_1: true
+cis_dil_section2_2: true
+cis_dil_section2_3: true
 cis_dil_section3: true
 cis_dil_section4: true
 cis_dil_section5: true
@@ -340,8 +345,21 @@ cis_dil_rsh_required: false
 cis_dil_ypbind_required: false
 
 # Time Synchronization
-cis_dil_time_synchronization: chrony
+cis_dil_time_synchronization_service: chrony
+  # ntp:
+    # Debian: ntp
+    # RedHat: ntpd
+  # chrony:
+    # Debian: chrony
+    # RedHat: chronyd
 # cis_dil_time_synchronization: ntp
+# cis_dil_time_synchronization_package:
+  # ntp:
+    # Debian: ntp
+    # RedHat: ntp
+  # chrony:
+    # Debian: chrony
+    # RedHat: chrony
 
 cis_dil_time_synchronization_servers:
   - "0.pool.ntp.org"

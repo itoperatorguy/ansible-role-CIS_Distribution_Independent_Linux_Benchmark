@@ -1,6 +1,6 @@
 ---
 - name: "SCORED | 2.3.1 | PATCH | Ensure NIS Client is not installed"
-  apt:
+  package:
       name: ypbind
       state: absent
   when:
@@ -13,7 +13,7 @@
       - rule_2.3.1
 
 - name: "SCORED | 2.3.2 | PATCH | Ensure rsh client is not installed"
-  apt:
+  package:
       name: rsh
       state: absent
   when:
@@ -26,7 +26,7 @@
       - rule_2.3.2
 
 - name: "SCORED | 2.3.3 | PATCH | Ensure talk client is not installed"
-  apt:
+  package:
       name: talk
       state: absent
   when:
@@ -39,7 +39,7 @@
       - rule_2.3.3
 
 - name: "SCORED | 2.3.4 | PATCH | Ensure telnet client is not installed"
-  apt:
+  package:
       name: telnet
       state: absent
   when:
@@ -52,7 +52,7 @@
       - rule_2.3.4
 
 - name: "SCORED | 2.3.5 | PATCH | Ensure LDAP client is not installed"
-  apt:
+  package:
       name: openldap-clients
       state: absent
   when:
