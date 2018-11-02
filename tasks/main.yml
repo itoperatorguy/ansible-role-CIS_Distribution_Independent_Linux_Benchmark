@@ -2,10 +2,9 @@
 # tasks file for Ubuntu1604-CIS
 - name: Check OS version and family
   fail:
-      msg: "This role can only be run agaist Ubuntu 16.04. {{ ansible_distribution }} {{ ansible_distribution_major_version }} is not supported."
-  when:
-      - not ansible_distribution == "Ubuntu"
-      - not ansible_distribution_release == "xenial"
+      msg: "This role can only be run agaist Ubuntu 16.04+ or RHEL/CentOS 7+ {{ ansible_distribution }} {{ ansible_distribution_major_version }} is not supported."
+  when: ( (ansible_distribution == "Ubuntu") and (ansible_distribution_major_version | int < 16) ) or
+        ( ( (ansible_distribution == "CentOS") or (ansible_distribution == "RedHat") ) and (ansible_distribution_major_version | int < 7) )
   tags:
       - always
 
@@ -22,34 +21,101 @@
       - prelim_tasks
       - always
 
-- include: section1.yml
+- include: section1/section1.1.yml
   become: true
-  when: ubuntu1604cis_section1
-  tags: section1
+  when:
+    - cis_dil_section1
+    - cis_dil_section1_1
+  tags:
+   - section1
+   - section1.1
+
+- include: section1/section1.2.yml
+  become: true
+  when:
+    - cis_dil_section1
+    - cis_dil_section1_2
+  tags:
+   - section1
+   - section1.2
+
+- include: section1/section1.3.yml
+  become: true
+  when:
+    - cis_dil_section1
+    - cis_dil_section1_3
+  tags:
+   - section1
+   - section1.3
+
+- include: section1/section1.4.yml
+  become: true
+  when:
+    - cis_dil_section1
+    - cis_dil_section1_4
+  tags:
+   - section1
+   - section1.4
+
+- include: section1/section1.5.yml
+  become: true
+  when:
+    - cis_dil_section1
+    - cis_dil_section1_5
+  tags:
+   - section1
+   - section1.5
+
+- include: section1/section1.6.yml
+  become: true
+  when:
+    - cis_dil_section1
+    - cis_dil_section1_6
+  tags:
+   - section1
+   - section1.6
+
+- include: section1/section1.7.yml
+  become: true
+  when:
+    - cis_dil_section1
+    - cis_dil_section1_7
+  tags:
+   - section1
+   - section1.7
+
+- include: section1/section1.8.yml
+  become: true
+  when:
+    - cis_dil_section1
+    - cis_dil_section1_8
+  tags:
+   - section1
+   - section1.8
 
 - include: section2.yml
   become: true
-  when: ubuntu1604cis_section2
+  when: cis_dil_section2
   tags: section2
 
 - include: section3.yml
   become: true
-  when: ubuntu1604cis_section3
+  when: cis_dil_section3
   tags: section3
 
 - include: section4.yml
   become: true
-  when: ubuntu1604cis_section4
+  when: cis_dil_section4
   tags: section4
 
 - include: section5.yml
   become: true
-  when: ubuntu1604cis_section5
+  when: cis_dil_section5
   tags: section5
 
 - include: section6.yml
   become: true
-  when: ubuntu1604cis_section6
+  when: cis_dil_section6
   tags: section6
 
 - include: post.yml

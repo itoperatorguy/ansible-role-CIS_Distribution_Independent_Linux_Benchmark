@@ -1,11 +1,26 @@
 ---
-- name: "SCORED | 1.3.1 | PATCH | Ensure AIDE is installed"
+- name: "SCORED | 1.3.1 | PATCH | Ensure AIDE is installed | Ubuntu 16.04+"
   apt:
       name: aide
       state: present
       install_recommends: false
   when:
       - cis_dil_rule_1_3_1
+      - ansible_os_family == "Debian"
+  tags:
+      - level1
+      - scored
+      - aide
+      - patch
+      - rule_1.3.1
+
+- name: "SCORED | 1.3.1 | PATCH | Ensure AIDE is installed | RHEL/CentOS 7+"
+  yum:
+      name: aide
+      state: present
+  when:
+      - cis_dil_rule_1_3_1
+      - (ansible_distribution == "CentOS") or (ansible_distribution == "RedHat")
   tags:
       - level1
       - scored

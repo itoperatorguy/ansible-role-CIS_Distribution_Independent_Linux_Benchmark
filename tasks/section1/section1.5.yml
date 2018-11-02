@@ -72,12 +72,26 @@
       - patch
       - rule_1.5.4
 
-- name: "SCORED | 1.5.4 | PATCH | Ensure prelink is disabled"
+- name: "SCORED | 1.5.4 | PATCH | Ensure prelink is disabled | Ubuntu 16.04+"
   apt:
       name: prelink
       state: absent
   when:
       - cis_dil_rule_1_5_4
+      - ansible_os_family == "Debian"
+  tags:
+      - level1
+      - scored
+      - patch
+      - rule_1.5.4
+
+- name: "SCORED | 1.5.4 | PATCH | Ensure prelink is disabled | RHEL/CentOS 7+"
+  yum:
+      name: prelink
+      state: absent
+  when:
+      - cis_dil_rule_1_5_4
+      - (ansible_distribution == "CentOS") or (ansible_distribution == "RedHat")
   tags:
       - level1
       - scored

@@ -19,22 +19,54 @@
   changed_when: false
   check_mode: false
 
-- name: "PRELIM | Run apt cache update"
+- name: "PRELIM | Run apt cache update | Ubuntu 16.04+"
   apt:
     update_cache: true
+  when:
+    - ansible_os_family == "Debian"
   changed_when: false
 
-- name: "PRELIM | Section 4.1 | Configure System Accounting (auditd)"
+- name: "PRELIM | Refresh yum repo cache | RHEL/CentOS 7+"
+  yum:
+    name: "*"
+    update_cache: yes
+    state: present
+  when:
+    - (ansible_distribution == "CentOS") or (ansible_distribution == "RedHat")
+  changed_when: false
+
+
+- name: "PRELIM | Section 4.1 | Configure System Accounting (auditd) | Ubuntu 16.04+"
   apt:
     name: "{{ auditd_package[ansible_os_family] }}"
     state: present
     install_recommends: false
+  when:
+    - ansible_os_family == "Debian"
 
-- name: "PRELIM | Section 5.1 | Configure cron"
+- name: "PRELIM | Section 4.1 | Configure System Accounting (auditd) | RHEL/CentOS 7+"
+  yum:
+    name: "{{ auditd_package[ansible_os_family] }}"
+    state: present
+  when:
+    - (ansible_distribution == "CentOS") or (ansible_distribution == "RedHat")
+
+- name: "PRELIM | Section 5.1 | Configure cron | Ubuntu 16.04+"
   apt:
     name: "{{ cron_package[ansible_os_family] }}"
     state: present
     install_recommends: false
+  when:
+    - ansible_os_family == "Debian"
+
+
+- name: "PRELIM | Section 5.1 | Configure cron | RHEL/CentOS 7+"
+  yum:
+    name: "{{ cron_package[ansible_os_family] }}"
+    state: present
+  when:
+    - (ansible_distribution == "CentOS") or (ansible_distribution == "RedHat")
+
 
 - name: "PRELIM | Check if prelink package is installed"
   command: "{{ prelim_check_package_command[ansible_os_family] }} prelink"

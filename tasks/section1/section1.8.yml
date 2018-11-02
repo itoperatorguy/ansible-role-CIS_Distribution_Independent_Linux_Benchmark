@@ -1,9 +1,25 @@
 ---
-- name: "NOTSCORED | 1.8 | PATCH | Ensure updates, patches, and additional security software are installed"
+- name: "NOTSCORED | 1.8 | PATCH | Ensure updates, patches, and additional security software are installed | Ubuntu 16.04+"
   apt:
       upgrade: dist
   when:
       - cis_dil_rule_1_8
+      - ansible_os_family == "Debian"
+  tags:
+      - level1
+      - notscored
+      - patch
+      - rule_1.8
+      - skip_ansible_lint
+
+- name: "NOTSCORED | 1.8 | PATCH | Ensure updates, patches, and additional security software are installed | RHEL/CentOS 7+"
+  yum:
+      name: "*"
+      update_only: yes
+      state: latest
+  when:
+      - cis_dil_rule_1_8
+      - (ansible_distribution == "CentOS") or (ansible_distribution == "RedHat")
   tags:
       - level1
       - notscored
