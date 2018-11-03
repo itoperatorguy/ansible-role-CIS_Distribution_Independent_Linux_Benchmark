@@ -40,7 +40,10 @@ cis_dil_section5_3: true
 cis_dil_section5_4: true
 cis_dil_section5_5: true
 cis_dil_section5_6: true
+# CIS Section 6 rules
 cis_dil_section6: true
+cis_dil_section6_1: true
+cis_dil_section6_2: true
 
 cis_dil_selinux_disable: false
 

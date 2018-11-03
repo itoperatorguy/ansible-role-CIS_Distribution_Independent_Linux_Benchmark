@@ -264,10 +264,23 @@
     - section5
     - section5.6
 
-- include: section6.yml
+- include: section6/section6.1.yml
   become: true
-  when: cis_dil_section6
-  tags: section6
+  when:
+    - cis_dil_section6
+    - cis_dil_section6_1
+  tags:
+    - section6
+    - section6.1
+
+- include: section6/section6.2.yml
+  become: true
+  when:
+    - cis_dil_section6
+    - cis_dil_section6_2
+  tags:
+    - section6
+    - section6.2
 
 - include: post.yml
   become: true

@@ -1,188 +1,4 @@
 ---
-- name: "NOTSCORED | 6.1.1 | PATCH | Audit system file permissions"
-  command: /bin/true
-  changed_when: false
-  when:
-      - ubuntu1604cis_rule_6_1_1
-  tags:
-      - level2
-      - notscored
-      - patch
-      - rule_6.1.1
-      - notimplemented
-
-- name: "SCORED | 6.1.2 | PATCH | Ensure permissions on /etc/passwd are configured"
-  file:
-      dest: /etc/passwd
-      owner: root
-      group: root
-      mode: 0644
-  when:
-      - ubuntu1604cis_rule_6_1_2
-  tags:
-      - level1
-      - scored
-      - patch
-      - rule_6.1.2
-
-- name: "SCORED | 6.1.3 | PATCH | Ensure permissions on /etc/shadow are configured"
-  file:
-      dest: /etc/shadow
-      owner: root
-      group: root
-      mode: 0000
-  when:
-      - ubuntu1604cis_rule_6_1_3
-  tags:
-      - level1
-      - scored
-      - patch
-      - rule_6.1.3
-
-- name: "SCORED | 6.1.4 | PATCH | Ensure permissions on /etc/group are configured"
-  file:
-      dest: /etc/group
-      owner: root
-      group: root
-      mode: 0644
-  when:
-      - ubuntu1604cis_rule_6_1_4
-  tags:
-      - level1
-      - scored
-      - patch
-      - rule_6.1.4
-
-- name: "SCORED | 6.1.5 | PATCH | Ensure permissions on /etc/gshadow are configured"
-  file:
-      dest: /etc/gshadow
-      owner: root
-      group: root
-      mode: 0000
-  when:
-      - ubuntu1604cis_rule_6_1_5
-  tags:
-      - level1
-      - scored
-      - patch
-      - rule_6.1.5
-
-- name: "SCORED | 6.1.6 | PATCH | Ensure permissions on /etc/passwd- are configured"
-  file:
-      dest: /etc/passwd-
-      owner: root
-      group: root
-      mode: 0600
-  when:
-      - ubuntu1604cis_rule_6_1_6
-  tags:
-      - level1
-      - scored
-      - patch
-      - rule_6.1.6
-
-- name: "SCORED | 6.1.7 | PATCH | Ensure permissions on /etc/shadow- are configured"
-  file:
-      dest: /etc/shadow-
-      owner: root
-      group: root
-      mode: 0000
-  when:
-      - ubuntu1604cis_rule_6_1_7
-  tags:
-      - level1
-      - scored
-      - patch
-      - rule_6.1.7
-
-- name: "SCORED | 6.1.8 | PATCH | Ensure permissions on /etc/group- are configured"
-  file:
-      dest: /etc/group-
-      owner: root
-      group: root
-      mode: 0600
-  when:
-      - ubuntu1604cis_rule_6_1_8
-  tags:
-      - level1
-      - scored
-      - patch
-      - rule_6.1.8
-
-- name: "SCORED | 6.1.9 | PATCH | Ensure permissions on /etc/gshadow- are configured"
-  file:
-      dest: /etc/gshadow-
-      owner: root
-      group: root
-      mode: 0600
-  when:
-      - ubuntu1604cis_rule_6_1_9
-  tags:
-      - level1
-      - scored
-      - patch
-      - rule_6.1.9
-
-- name: "SCORED | 6.1.10 | PATCH | Ensure no world writable files exist"
-  command: /bin/true
-  changed_when: false
-  when:
-      - ubuntu1604cis_rule_6_1_10
-  tags:
-      - level1
-      - scored
-      - patch
-      - rule_6.1.10
-      - notimplemented
-
-- name: "SCORED | 6.1.11 | PATCH | Ensure no unowned files or directories exist"
-  command: /bin/true
-  changed_when: false
-  when:
-      - ubuntu1604cis_rule_6_1_11
-  tags:
-      - level1
-      - scored
-      - patch
-      - rule_6.1.11
-      - notimplemented
-
-- name: "SCORED | 6.1.12 | PATCH | Ensure no ungrouped files or directories exist"
-  command: /bin/true
-  changed_when: false
-  when:
-      - ubuntu1604cis_rule_6_1_12
-  tags:
-      - level1
-      - scored
-      - patch
-      - rule_6.1.12
-      - notimplemented
-
-- name: "NOTSCORED | 6.1.13 | PATCH | Audit SUID executables"
-  command: /bin/true
-  changed_when: false
-  when:
-      - ubuntu1604cis_rule_6_1_13
-  tags:
-      - level1
-      - notscored
-      - patch
-      - rule_6.1.13
-      - notimplemented
-
-- name: "NOTSCORED | 6.1.14 | PATCH | Audit SGID executables"
-  command: /bin/true
-  changed_when: false
-  when:
-      - ubuntu1604cis_rule_6_1_14
-  tags:
-      - level1
-      - notscored
-      - patch
-      - rule_6.1.14
-      - notimplemented
-
 - name: "SCORED | 6.2.1 | PATCH | Ensure password fields are not empty"
   command: passwd -l {{ item }}
   changed_when: false
@@ -190,7 +6,7 @@
   with_items: "{{ empty_password_accounts.stdout_lines }}"
   when:
       - empty_password_accounts.rc
-      - ubuntu1604cis_rule_6_2_1
+      - cis_dil_rule_6_2_1
   tags:
       - level1
       - scored
@@ -202,7 +18,7 @@
   changed_when: false
   failed_when: false
   when:
-      - ubuntu1604cis_rule_6_2_2
+      - cis_dil_rule_6_2_2
   tags:
       - level1
       - scored
@@ -214,7 +30,7 @@
   changed_when: false
   failed_when: false
   when:
-      - ubuntu1604cis_rule_6_2_3
+      - cis_dil_rule_6_2_3
   tags:
       - level1
       - scored
@@ -226,7 +42,7 @@
   changed_when: false
   failed_when: false
   when:
-      - ubuntu1604cis_rule_6_2_4
+      - cis_dil_rule_6_2_4
   tags:
       - level1
       - scored
@@ -240,7 +56,7 @@
   with_items: "{{ uid_zero_accounts_except_root.stdout_lines }}"
   when:
       - uid_zero_accounts_except_root.rc
-      - ubuntu1604cis_rule_6_2_5
+      - cis_dil_rule_6_2_5
   tags:
       - level1
       - scored
@@ -251,7 +67,7 @@
   command: /bin/true
   changed_when: false
   when:
-      - ubuntu1604cis_rule_6_2_6
+      - cis_dil_rule_6_2_6
   tags:
       - level1
       - scored
@@ -276,7 +92,7 @@
   changed_when: false
   check_mode: false
   when:
-      - ubuntu1604cis_rule_6_2_6
+      - cis_dil_rule_6_2_6
   tags:
       - level1
       - scored
@@ -301,7 +117,7 @@
   command: /bin/true
   changed_when: false
   when:
-      - ubuntu1604cis_rule_6_2_7
+      - cis_dil_rule_6_2_7
   tags:
       - level1
       - scored
@@ -313,7 +129,7 @@
   command: /bin/true
   changed_when: false
   when:
-      - ubuntu1604cis_rule_6_2_8
+      - cis_dil_rule_6_2_8
   tags:
       - level1
       - scored
@@ -325,7 +141,7 @@
   command: /bin/true
   changed_when: false
   when:
-      - ubuntu1604cis_rule_6_2_9
+      - cis_dil_rule_6_2_9
   tags:
       - level1
       - scored
@@ -337,7 +153,7 @@
   command: /bin/true
   changed_when: false
   when:
-      - ubuntu1604cis_rule_6_2_10
+      - cis_dil_rule_6_2_10
   tags:
       - level1
       - scored
@@ -351,7 +167,7 @@
       dest: "~{{ item }}/.forward"
   with_items: "{{ users.stdout_lines }}"
   when:
-      - ubuntu1604cis_rule_6_2_11
+      - cis_dil_rule_6_2_11
   tags:
       - level1
       - scored
@@ -364,7 +180,7 @@
       dest: "~{{ item }}/.netrc"
   with_items: "{{ users.stdout_lines }}"
   when:
-      - ubuntu1604cis_rule_6_2_12
+      - cis_dil_rule_6_2_12
   tags:
       - level1
       - scored
@@ -377,7 +193,7 @@
       dest: "~{{ item }}/.rhosts"
   with_items: "{{ users.stdout_lines }}"
   when:
-      - ubuntu1604cis_rule_6_2_14
+      - cis_dil_rule_6_2_14
   tags:
       - level1
       - scored
@@ -388,7 +204,7 @@
   command: /bin/true
   changed_when: false
   when:
-      - ubuntu1604cis_rule_6_2_15
+      - cis_dil_rule_6_2_15
   tags:
       - level1
       - scored
@@ -400,7 +216,7 @@
   command: /bin/true
   changed_when: false
   when:
-      - ubuntu1604cis_rule_6_2_16
+      - cis_dil_rule_6_2_16
   tags:
       - level1
       - scored
@@ -412,7 +228,7 @@
   command: /bin/true
   changed_when: false
   when:
-      - ubuntu1604cis_rule_6_2_17
+      - cis_dil_rule_6_2_17
   tags:
       - level1
       - scored
@@ -424,7 +240,7 @@
   command: /bin/true
   changed_when: false
   when:
-      - ubuntu1604cis_rule_6_2_18
+      - cis_dil_rule_6_2_18
   tags:
       - level1
       - scored
@@ -436,7 +252,7 @@
   command: /bin/true
   changed_when: false
   when:
-      - ubuntu1604cis_rule_6_2_19
+      - cis_dil_rule_6_2_19
   tags:
       - level1
       - scored

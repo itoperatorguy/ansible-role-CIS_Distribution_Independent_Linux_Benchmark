@@ -75,6 +75,7 @@
   service:
       name: auditd
       state: restarted
+      use: service
   when:
       - cis_dil_skip_for_travis == false
   tags:
