@@ -183,10 +183,32 @@
     - section3
     - section3.7
 
-- include: section4.yml
+- include: section4/section4.1.yml
   become: true
-  when: cis_dil_section4
-  tags: section4
+  when:
+    - cis_dil_section4
+    - cis_dil_section4_1
+  tags:
+    - section4
+    - section4.1
+
+- include: section4/section4.2.yml
+  become: true
+  when:
+    - cis_dil_section4
+    - cis_dil_section4_2
+  tags:
+    - section4
+    - section4.2
+
+- include: section4/section4.3.yml
+  become: true
+  when:
+    - cis_dil_section4
+    - cis_dil_section4_3
+  tags:
+    - section4
+    - section4.3
 
 - include: section5.yml
   become: true

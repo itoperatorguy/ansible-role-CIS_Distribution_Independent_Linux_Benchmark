@@ -39,6 +39,14 @@
 - name: generate new grub config
   become: true
   command: grub-mkconfig -o "{{ grub_cfg.stat.path }}"
+  when:
+   - ansible_os_family == "Debian"
+
+- name: generate new grub config
+  become: true
+  command: grub2-mkconfig -o "{{ grub_cfg.stat.path }}"
+  when:
+    - (ansible_distribution == "CentOS") or (ansible_distribution == "RedHat")
 
 - name: restart firewalld
   become: true
@@ -68,7 +76,7 @@
       name: auditd
       state: restarted
   when:
-      - ubuntu1604cis_skip_for_travis == false
+      - cis_dil_skip_for_travis == false
   tags:
       - skip_ansible_lint
 
@@ -76,6 +84,6 @@
   become: true
   command: /sbin/augenrules --load
   when:
-      - ubuntu1604cis_skip_for_travis == false
+      - cis_dil_skip_for_travis == false
   tags:
       - skip_ansible_lint

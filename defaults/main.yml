@@ -27,7 +27,11 @@ cis_dil_section3_4: true
 cis_dil_section3_5: true
 cis_dil_section3_6: true
 cis_dil_section3_7: true
+# CIS Section 3 rules
 cis_dil_section4: true
+cis_dil_section4_1: true
+cis_dil_section4_2: true
+cis_dil_section4_3: true
 cis_dil_section5: true
 cis_dil_section6: true
 
