@@ -27,12 +27,19 @@ cis_dil_section3_4: true
 cis_dil_section3_5: true
 cis_dil_section3_6: true
 cis_dil_section3_7: true
-# CIS Section 3 rules
+# CIS Section 4 rules
 cis_dil_section4: true
 cis_dil_section4_1: true
 cis_dil_section4_2: true
 cis_dil_section4_3: true
+# CIS Section 5 rules
 cis_dil_section5: true
+cis_dil_section5_1: true
+cis_dil_section5_2: true
+cis_dil_section5_3: true
+cis_dil_section5_4: true
+cis_dil_section5_5: true
+cis_dil_section5_6: true
 cis_dil_section6: true
 
 cis_dil_selinux_disable: false
@@ -241,9 +248,11 @@ cis_dil_rule_5_4_1_1: true
 cis_dil_rule_5_4_1_2: true
 cis_dil_rule_5_4_1_3: true
 cis_dil_rule_5_4_1_4: true
+cis_dil_rule_5_4_1_5: true
 cis_dil_rule_5_4_2: true
 cis_dil_rule_5_4_3: true
 cis_dil_rule_5_4_4: true
+cis_dil_rule_5_4_5: true
 cis_dil_rule_5_5: true
 cis_dil_rule_5_6: false
 

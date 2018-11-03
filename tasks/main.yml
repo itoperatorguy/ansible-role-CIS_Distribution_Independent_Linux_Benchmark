@@ -210,10 +210,59 @@
     - section4
     - section4.3
 
-- include: section5.yml
+- include: section5/section5.1.yml
   become: true
-  when: cis_dil_section5
-  tags: section5
+  when:
+    - cis_dil_section5
+    - cis_dil_section5_1
+  tags:
+    - section5
+    - section5.1
+
+- include: section5/section5.2.yml
+  become: true
+  when:
+    - cis_dil_section5
+    - cis_dil_section5_2
+  tags:
+    - section5
+    - section5.2
+
+- include: section5/section5.3.yml
+  become: true
+  when:
+    - cis_dil_section5
+    - cis_dil_section5_3
+  tags:
+    - section5
+    - section5.3
+
+- include: section5/section5.4.yml
+  become: true
+  when:
+    - cis_dil_section5
+    - cis_dil_section5_4
+  tags:
+    - section5
+    - section5.4
+
+- include: section5/section5.5.yml
+  become: true
+  when:
+    - cis_dil_section5
+    - cis_dil_section5_5
+  tags:
+    - section5
+    - section5.5
+
+- include: section5/section5.6.yml
+  become: true
+  when:
+    - cis_dil_section5
+    - cis_dil_section5_6
+  tags:
+    - section5
+    - section5.6
 
 - include: section6.yml
   become: true

@@ -1,0 +1,12 @@
+---
+- name: "NOTSCORED | 5.5 | PATCH | Ensure root login is restricted to system console"
+  command: /bin/true
+  changed_when: false
+  when:
+      - cis_dil_rule_5_5
+  tags:
+      - level1
+      - patch
+      - rule_5.5
+      - notscored
+      - notimplemented
